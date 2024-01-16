@@ -6,15 +6,15 @@ import os
 
 
 def create_database():
-    if os.path.exists("workers.db"):
-        os.remove("workers.db")
+    if os.path.exists("temperatures.db"):
+        os.remove("temperatures.db")
         print("An old database removed.")
-    connection = sqlite3.connect("workers.db")
+    connection = sqlite3.connect("temperatures.db")
     cursor = connection.cursor()
-    cursor.execute(""" CREATE TABLE workers_log (
+    cursor.execute(""" CREATE TABLE temperatures_log (
         log_time text,
-        worker text,
-        terminal_id text
+        id text,
+        value text
     )""")
     connection.commit()
     connection.close()
