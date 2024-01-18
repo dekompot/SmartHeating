@@ -20,3 +20,14 @@ def create_database():
 
 if __name__ == "__main__":
     create_database()
+
+    db = Database()
+    db.insert_valve(1, 1)
+    db.insert_desired_temperature(1 ,1)
+
+    print(db.get_desired_temperature(1))
+
+    
+
+
+

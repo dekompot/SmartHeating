@@ -7,11 +7,13 @@ class Database:
         self.name = database_name
 
     def create_table(self, name, *args):
-        create_command = f" CREATE TABLE {name} ({[attribute + ' text, ' for attribute in args]})"
+        table_attr = ''.join([attribute + ' text, ' for attribute in args])[:-2]
+        create_command = f" CREATE TABLE {name} ({table_attr})"
         self.execute_with_connection(create_command)
 
     def insert(self, table, *args):
-        insert_command = f"INSERT INTO {table} VALUES ({time.ctime(), }{[val + ', ' for val in args]})"
+        insert_attr = ', '.join([f"'{val}'" for val in args])
+        insert_command = f"INSERT INTO {table} VALUES ('{time.ctime()}', {insert_attr})"
         self.execute_with_connection(insert_command)
 
     def get(self, table, expression='1=1'):
@@ -32,7 +34,6 @@ class Database:
         cursor = connection.cursor()
         cursor.execute(sql_command)
         connection.commit()
-        cursor. return_list = cursor.fetchall()
         cursor.close()
 
     def insert_temperature(self, sensor_area_id, actual_temperature):
