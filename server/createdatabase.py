@@ -1,23 +1,20 @@
 #!/usr/bin/env python3
 
 import sqlite3
-import time
 import os
+from database_interface import Database
 
 
 def create_database():
     if os.path.exists("temperatures.db"):
         os.remove("temperatures.db")
-        print("An old database removed.")
-    connection = sqlite3.connect("temperatures.db")
-    cursor = connection.cursor()
-    cursor.execute(""" CREATE TABLE temperatures_log (
-        log_time text,
-        id text,
-        value text
-    )""")
-    connection.commit()
-    connection.close()
+        print("An old database removed.")or()
+
+    db = Database("temperatures.db")
+    db.create_table('actual_temperatures', 'log_time', 'area_id', 'value')
+    db.create_table('desired_temperatures', 'log_time', 'area_id', 'value')
+    db.create_table('valves', 'log_time', 'area_id', 'value')
+    db.create_table('heating', 'log_time', 'value')
     print("The new database created.")
 
 

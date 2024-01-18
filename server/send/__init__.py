@@ -1,1 +1,0 @@
-"""Sending all decisions to heating unit and valves."""

@@ -1,8 +1,3 @@
-"""
-ACTUATOR - receives communication from the server.
-The heating unit processes messages from server to heat up temperature.
-This programm may communicate with an interface of working heating unit.
-"""
 #!/usr/bin/env python3
 """Managing simple GUI for user to change desired temperature in each area."""
 """may present current temperature?"""
@@ -12,17 +7,19 @@ from server.process import process_message
 import paho.mqtt.client as mqtt
 from config import BROKER
 
-def heat():
-    print("ogrzewaj!")
+def send_to_process(self, client, userdata, message):
+    process_message(message)
+
 
 def configure(client, userdata, flags, rc):
-    client.subscribe(f"heating")
+    client.subscribe(f"temperature")
+    client.subscribe(f"valve")
 
 
 def run():
     client = mqtt.Client()
     client.on_connect = configure
-    client.on_message = heat
+    client.on_message = send_to_process
     client.connect(BROKER)
     client.loop_forever()
 

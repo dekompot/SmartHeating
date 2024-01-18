@@ -1,1 +1,0 @@
-"""Always-up programm to listen to sensors' messages."""
