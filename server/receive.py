@@ -3,11 +3,11 @@
 """may present current temperature?"""
 """from db???"""
 
-from server.process import process_message
+from process import process_message
 import paho.mqtt.client as mqtt
 from config import BROKER
 
-def send_to_process(self, client, userdata, message):
+def send_to_process(client, userdata, message):
     process_message(message)
 
 

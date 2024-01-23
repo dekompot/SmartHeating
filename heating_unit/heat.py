@@ -8,12 +8,12 @@ This programm may communicate with an interface of working heating unit.
 """may present current temperature?"""
 """from db???"""
 
-from server.process import process_message
 import paho.mqtt.client as mqtt
 from config import BROKER
 
 def heat():
     print("ogrzewaj!")
+
 
 def configure(client, userdata, flags, rc):
     client.subscribe(f"heating")

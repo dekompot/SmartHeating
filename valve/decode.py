@@ -1,5 +1,5 @@
-def decode_temperature(message):
-    return read_topic(message), read_id(message), read_value(message)
+def decode_with_id(message):
+    return read_topic(message), int(read_id(message)), float(read_value(message))
 
 
 def read_topic(message):

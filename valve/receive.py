@@ -5,14 +5,14 @@ The valve functions as a gate, regulating the flow of heat to a specific part of
 """
 import paho.mqtt.client as mqtt
 from config import BROKER, AREA_ID
-from decode import decode_temperature
+from decode import decode_with_id
 
 
 class Valve:
     def __init__(self, id):
         self.id = id
-        self.desired_temperature = None
-        self.last_read_temperature = None
+        self.desired_temperature = 25
+        self.last_read_temperature = 0
         self.is_open = False
         self.client = mqtt.Client()
 
@@ -23,7 +23,8 @@ class Valve:
         self.client.loop_forever()
 
     def process_message(self, client, userdata, message):
-        topic, sensor_area_id, value = decode_temperature(message)
+        topic, sensor_area_id, value = decode_with_id(message)
+        print(topic, sensor_area_id, value)
         if sensor_area_id == AREA_ID:
             if topic == 'desired_temperature':
                 self.process_desired_temperature(value)
@@ -42,10 +43,12 @@ class Valve:
         self.process_current_temperature(self.last_read_temperature)
 
     def close(self):
+        print('close')
         self.is_open = False
         self.client.publish(f"valve", f'{self.id}:close')
 
     def open(self):
+        print('open')
         self.is_open = True
         self.client.publish(f"valve", f'{self.id}:open')
 
