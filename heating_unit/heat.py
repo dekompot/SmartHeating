@@ -11,6 +11,7 @@ This programm may communicate with an interface of working heating unit.
 import paho.mqtt.client as mqtt
 from config import BROKER
 
+
 def heat():
     print("ogrzewaj!")
 

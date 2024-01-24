@@ -4,7 +4,15 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="6989899d-75fb-4113-8071-3d0f15b2d2f9" name="Changes" comment="" />
+    <list default="true" id="6989899d-75fb-4113-8071-3d0f15b2d2f9" name="Changes" comment="Start with visualizing on raspberrys">
+      <change afterPath="$PROJECT_DIR$/area/area.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/heating_unit/heat.py" beforeDir="false" afterPath="$PROJECT_DIR$/heating_unit/heat.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/temperature_sensor/send.py" beforeDir="false" afterPath="$PROJECT_DIR$/area/temperature_sensor.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/valve/config.py" beforeDir="false" afterPath="$PROJECT_DIR$/area/config.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/valve/decode.py" beforeDir="false" afterPath="$PROJECT_DIR$/area/decode.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/valve/receive.py" beforeDir="false" afterPath="$PROJECT_DIR$/area/valve.py" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -39,22 +47,30 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent"><![CDATA[{
-  "keyToString": {
-    "Python tests.Python tests for test_db.test_db_create.executor": "Run",
-    "Python.createdatabase.executor": "Run",
-    "RunOnceActivity.OpenProjectViewOnStart": "true",
-    "RunOnceActivity.ShowReadmeOnStart": "true",
-    "git-widget-placeholder": "main",
-    "last_opened_file_path": "C:/Users/julia/anaconda3/envs/UniPlanner",
-    "node.js.detected.package.eslint": "true",
-    "node.js.detected.package.tslint": "true",
-    "node.js.selected.package.eslint": "(autodetect)",
-    "node.js.selected.package.tslint": "(autodetect)",
-    "nodejs_package_manager_path": "npm",
-    "vue.rearranger.settings.migration": "true"
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;Python tests.Python tests for test_db.test_db_create.executor&quot;: &quot;Run&quot;,
+    &quot;Python.createdatabase.executor&quot;: &quot;Run&quot;,
+    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;git-widget-placeholder&quot;: &quot;main&quot;,
+    &quot;last_opened_file_path&quot;: &quot;C:/Users/julia/PycharmProjects/SmartHeating&quot;,
+    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
+    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
+    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
+    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
+    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
+    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
   }
-}]]></component>
+}</component>
+  <component name="RecentsManager">
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="C:\Users\julia\PycharmProjects\SmartHeating" />
+    </key>
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="C:\Users\julia\PycharmProjects\SmartHeating\area" />
+    </key>
+  </component>
   <component name="RunManager">
     <configuration name="Python tests for test_db.test_db_create" type="tests" factoryName="Autodetect" temporary="true" nameIsGenerated="true">
       <module name="SmartHeating" />
@@ -96,12 +112,37 @@
       <workItem from="1705475313277" duration="842000" />
       <workItem from="1705479398005" duration="250000" />
       <workItem from="1705569233169" duration="2398000" />
-      <workItem from="1706021266180" duration="513000" />
+      <workItem from="1706021266180" duration="4502000" />
+      <workItem from="1706029618241" duration="128000" />
+      <workItem from="1706085817651" duration="2969000" />
+      <workItem from="1706099959767" duration="6448000" />
     </task>
+    <task id="LOCAL-00001" summary="Changes after testing in lab">
+      <option name="closed" value="true" />
+      <created>1706023778954</created>
+      <option name="number" value="00001" />
+      <option name="presentableId" value="LOCAL-00001" />
+      <option name="project" value="LOCAL" />
+      <updated>1706023778954</updated>
+    </task>
+    <task id="LOCAL-00002" summary="Start with visualizing on raspberrys">
+      <option name="closed" value="true" />
+      <created>1706028277032</created>
+      <option name="number" value="00002" />
+      <option name="presentableId" value="LOCAL-00002" />
+      <option name="project" value="LOCAL" />
+      <updated>1706028277032</updated>
+    </task>
+    <option name="localTasksCounter" value="3" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
     <option name="version" value="3" />
+  </component>
+  <component name="VcsManagerConfiguration">
+    <MESSAGE value="Changes after testing in lab" />
+    <MESSAGE value="Start with visualizing on raspberrys" />
+    <option name="LAST_COMMIT_MESSAGE" value="Start with visualizing on raspberrys" />
   </component>
   <component name="com.intellij.coverage.CoverageDataManagerImpl">
     <SUITE FILE_PATH="coverage/SmartHeating$createdatabase.coverage" NAME="createdatabase Coverage Results" MODIFIED="1705572239031" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/server" />

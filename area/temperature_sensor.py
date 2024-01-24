@@ -4,11 +4,15 @@ SENDER - sends communication to the server
 Periodically measures and sends info about current temperature.
 """
 import sys
+from datetime import time
+from typing import Callable
+
 import paho.mqtt.client as mqtt
 import w1thermsensor
 from config import AREA_ID, BROKER
 import lib.oled.SSD1331 as SSD1331
 from PIL import Image, ImageDraw, ImageFont
+from decode import decode_with_id
 
 
 class DisplayInfo:
@@ -32,33 +36,49 @@ class DisplayInfo:
 
     def display_on_leds(self, temperature):
         # to be implemented
+        pass
 
 
 # Add code that stops sensor from sending information?
 class TemperatureSensor:
 
-    def __init__(self, broker, area_id, frequency=2, callback: Callable = None):
-        self.broker = broker
+    def __init__(self, area_id, callback: Callable = None):
         self.area_id = area_id
         self.client = mqtt.Client()
-        self.frequency = frequency
         self.sensor = w1thermsensor.W1ThermSensor()
         self.callback = callback
 
-    def measure(self):
-        while True:
-            temp = self.sensor.get_temperature()
-            self.send_message(temp)
-            self.callback(temp)
-            time.sleep(self.frequency)
+    def listen(self):
+        self.client.loop_start()
 
-    def send_message(self, value):
-        self.client.connect(self.broker)
-        self.client.publish("temperature", f"{self.area_id}:{value:.2f}")
+    def stop(self):
+        self.client.loop_stop(force=True)
         self.client.disconnect()
+
+    def configure(self):
+        self.client.on_message = self.process_message
+        self.client.connect(BROKER)
+        self.client.subscribe("desired")
+
+    def process_message(self, client, userdata, message):
+        topic, sensor_area_id, value = decode_with_id(message)
+        print(topic, sensor_area_id, value)
+        if sensor_area_id == self.area_id:
+            self.send_measurement()
+
+    def send_measurement(self):
+        temp = self.sensor.get_temperature()
+        self.publish(temp)
+        self.callback(temp)
+
+    def publish(self, value):
+        self.client.connect(BROKER)
+        self.client.publish(f"actual", f"{self.area_id}/{value:.2f}")
+        self.client.disconnect()
+
 
 
 if __name__ == "__main__":
     id = AREA_ID if len(sys.argv) != 2 else sys.argv[1]
-    sensor = TemperatureSensor(BROKER, id)
-    sensor.measure()
+    sensor = TemperatureSensor(id)
+    sensor.send_measurement()

@@ -9,27 +9,31 @@ from decode import decode_with_id
 
 
 class Valve:
-    def __init__(self, id):
-        self.id = id
-        self.desired_temperature = 25
+    def __init__(self, area_id):
+        self.area_id = area_id
+        self.desired_temperature = None
         self.last_read_temperature = 0
         self.is_open = False
         self.client = mqtt.Client()
 
-    def listen(self):
-        self.client.on_connect = configure
+    def configure(self):
+        self.client.on_connect = self.configure
         self.client.on_message = self.process_message
         self.client.connect(BROKER)
-        self.client.loop_forever()
+        self.client.publish("ask", f"desired/{self.area_id}")
+
+    def listen(self):
+        self.client.loop_start()
+
+    def stop(self):
+        self.client.loop_stop(force=True)
+        self.client.disconnect() #?
 
     def process_message(self, client, userdata, message):
         topic, sensor_area_id, value = decode_with_id(message)
         print(topic, sensor_area_id, value)
-        if sensor_area_id == AREA_ID:
-            if topic == 'desired_temperature':
-                self.process_desired_temperature(value)
-            elif topic == 'temperature' and sensor_area_id:
-                self.process_current_temperature(value)
+        if sensor_area_id == self.area_id:
+            self.process_desired_temperature(value)
 
     def process_current_temperature(self, temperature):
         self.last_read_temperature = temperature
@@ -45,17 +49,13 @@ class Valve:
     def close(self):
         print('close')
         self.is_open = False
-        self.client.publish(f"valve", f'{self.id}:close')
 
     def open(self):
         print('open')
         self.is_open = True
-        self.client.publish(f"valve", f'{self.id}:open')
 
-
-def configure(client, userdata, flags, rc):
-    client.subscribe(f"temperature")
-    client.subscribe(f"desired_temperature")
+    def configure(self, client, userdata, flags, rc):
+        client.subscribe(f"desired")
 
 
 if __name__ == "__main__":
