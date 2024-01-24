@@ -12,6 +12,7 @@ from decode import decode_temperature
 
 N_LEDS = 8
 
+
 class MockSensor:
     def get_temperature(self):
         return 10 + random.random() * 10

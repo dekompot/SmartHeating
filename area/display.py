@@ -8,6 +8,8 @@ import lib.oled.SSD1331 as SSD1331
 from PIL import Image, ImageDraw, ImageFont
 from decode import decode_with_id
 
+N_LEDS = 8
+
 class DisplayInfo:
 
     def __init__(self):
@@ -26,7 +28,8 @@ class DisplayInfo:
         # self.disp.reset()
         image1 = Image.new("RGB", (self.disp.width, self.disp.height), "WHITE")
         draw = ImageDraw.Draw(image1)
-        draw.text((8, 0), f'Temperature: {temperature:0.2f}', font=self.font, fill='BLACK')
+        draw.text((1, 1), f'Temperature: {temperature:0.2f}', font=self.font, fill='BLACK')
+        draw.showImage(image1, 0, 0)
         print(f'Temperature: {temperature:0.2f}')
 
     def display_on_leds(self, valve_status):

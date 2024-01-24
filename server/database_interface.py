@@ -20,7 +20,6 @@ class Database:
         insert_command = (f"UPDATE Temperatures SET {attribute} = '{value}', "
                           f"{attribute}Timestamp='{get_timestamp()}' "
                           f"WHERE areaId={area_id}")
-        print(insert_command)
         self.execute_with_connection(insert_command)
 
     def get(self, table, attribute, expression='1=1'):
@@ -39,11 +38,14 @@ class Database:
         connection.commit()
         connection.close()
 
+    def get_number_of_unsatisfied(self):
+        return self.get('Temperatures', 'COUNT(*)', 'desiredTemperature>actualTemperature')
+
     def get_actual_temperature(self, area_id):
-        return self.get('Temperatures','actualTemperature',f'areaId={area_id}')
+        return self.get('Temperatures', 'actualTemperature', f'areaId={area_id}')
 
     def get_desired_temperature(self, area_id):
-        return self.get('Temperatures','desiredTemperature',f'areaId={area_id}')
+        return self.get('Temperatures', 'desiredTemperature', f'areaId={area_id}')
 
     def get_state(self):
         return self.get('Heating', 'state')
@@ -55,7 +57,8 @@ class Database:
         self.update_temperature(area_id, 'desiredTemperature', desired_temperature)
 
     def update_state(self, new_state):
-        insert_command = (f"UPDATE Heating SET state = {new_state}")
+        insert_command = (f"UPDATE Heating SET state = '{new_state}'")
+
         self.execute_with_connection(insert_command)
 
     def init_temperature(self, areaId, defaultTemperature):
@@ -63,7 +66,7 @@ class Database:
                     defaultTemperature, get_timestamp())
 
     def init_heating(self):
-        self.insert('Heating', 'Stop', get_timestamp())
+        self.insert('Heating', 'stop', get_timestamp())
 
 
 def get_timestamp():

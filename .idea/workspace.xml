@@ -5,19 +5,15 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="6989899d-75fb-4113-8071-3d0f15b2d2f9" name="Changes" comment="implement area">
-      <change afterPath="$PROJECT_DIR$/area/display.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/heating_unit/display.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/area/area.py" beforeDir="false" afterPath="$PROJECT_DIR$/area/area.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/area/decode.py" beforeDir="false" afterPath="$PROJECT_DIR$/area/decode.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/area/display.py" beforeDir="false" afterPath="$PROJECT_DIR$/area/display.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/area/temperature_sensor.py" beforeDir="false" afterPath="$PROJECT_DIR$/area/temperature_sensor.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/area/valve.py" beforeDir="false" afterPath="$PROJECT_DIR$/area/valve.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/server/gui.py" beforeDir="false" afterPath="$PROJECT_DIR$/server/gui.py" afterDir="false" />
     </list>
-    <list id="3c79c0e2-93ec-4113-a145-6395534d8221" name="Changes by 48791" comment="">
-      <change beforePath="$PROJECT_DIR$/server/createdatabase.py" beforeDir="false" afterPath="$PROJECT_DIR$/server/createdatabase.py" afterDir="false" />
+    <list id="29723e6e-a2e5-486e-831d-90adab337ea0" name="Changes by 48791" comment="">
+      <change beforePath="$PROJECT_DIR$/server/config.py" beforeDir="false" afterPath="$PROJECT_DIR$/server/config.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/server/database_interface.py" beforeDir="false" afterPath="$PROJECT_DIR$/server/database_interface.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/server/decode.py" beforeDir="false" afterPath="$PROJECT_DIR$/server/decode.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/server/process.py" beforeDir="false" afterPath="$PROJECT_DIR$/server/process.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/server/receive.py" beforeDir="false" afterPath="$PROJECT_DIR$/server/receive.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -122,7 +118,7 @@
       <workItem from="1706021266180" duration="4502000" />
       <workItem from="1706029618241" duration="128000" />
       <workItem from="1706085817651" duration="2969000" />
-      <workItem from="1706099959767" duration="11747000" />
+      <workItem from="1706099959767" duration="19109000" />
     </task>
     <task id="LOCAL-00001" summary="Changes after testing in lab">
       <option name="closed" value="true" />
@@ -148,7 +144,15 @@
       <option name="project" value="LOCAL" />
       <updated>1706115878704</updated>
     </task>
-    <option name="localTasksCounter" value="4" />
+    <task id="LOCAL-00004" summary="Create area and database">
+      <option name="closed" value="true" />
+      <created>1706124697910</created>
+      <option name="number" value="00004" />
+      <option name="presentableId" value="LOCAL-00004" />
+      <option name="project" value="LOCAL" />
+      <updated>1706124697910</updated>
+    </task>
+    <option name="localTasksCounter" value="5" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -158,7 +162,8 @@
     <MESSAGE value="Changes after testing in lab" />
     <MESSAGE value="Start with visualizing on raspberrys" />
     <MESSAGE value="implement area" />
-    <option name="LAST_COMMIT_MESSAGE" value="implement area" />
+    <MESSAGE value="Create area and database" />
+    <option name="LAST_COMMIT_MESSAGE" value="Create area and database" />
   </component>
   <component name="com.intellij.coverage.CoverageDataManagerImpl">
     <SUITE FILE_PATH="coverage/SmartHeating$createdatabase.coverage" NAME="createdatabase Coverage Results" MODIFIED="1705572239031" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/server" />
