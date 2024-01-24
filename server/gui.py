@@ -24,7 +24,7 @@ class GUI:
     def setup(self):
         self.window.title("TITLE")
         label = tkinter.Label(self.window, text="MAIN_LABEL")
-        label.grid(row=0,columnspan=NUMBER_OF_AREAS)
+        label.grid(row=0, columnspan=NUMBER_OF_AREAS)
 
         for i in range(NUMBER_OF_AREAS):
             label = tkinter.Label(self.window, text=f"area {i} : ")

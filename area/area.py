@@ -1,9 +1,10 @@
+import sys
 import time
 
 import paho.mqtt.client as mqtt
 
-from area.temperature_sensor import TemperatureSensor
-from area.valve import Valve
+from temperature_sensor import TemperatureSensor
+from valve import Valve
 
 
 class Area:
@@ -12,7 +13,8 @@ class Area:
         self.area_id = area_id
         self.frequency = frequency
         self.valve = Valve(self.area_id)
-        self.temperature_sensor = TemperatureSensor(self.area_id, callback=self.valve.process_current_temperature)
+        self.temperature_sensor = TemperatureSensor(self.area_id,
+                                                    callbacks=[self.valve.process_current_temperature])
 
     def configure(self):
         self.valve.configure()
@@ -27,9 +29,12 @@ class Area:
             self.temperature_sensor.send_measurement()
             time.sleep(self.frequency)
 
-    def stop(self):
-        self.valve.stop()
-        self.temperature_sensor.stop()
 
+if __name__ == "__main__":
+    area_id = int(sys.argv[1]) if len(sys.argv) > 1 else 1
+    frequency = int(sys.argv[2]) if len(sys.argv) > 2 else 2
 
-
+    area = Area(area_id=area_id, frequency=frequency)
+    area.configure()
+    area.listen()
+    area.loop()

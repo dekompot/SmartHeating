@@ -1,5 +1,5 @@
+from datetime import datetime
 import sqlite3
-import time
 
 
 class Database:
@@ -12,38 +12,59 @@ class Database:
         self.execute_with_connection(create_command)
 
     def insert(self, table, *args):
-        insert_attr = ', '.join([f"'{val}'" for val in args])
-        insert_command = f"INSERT INTO {table} VALUES ('{time.ctime()}', {insert_attr})"
+        insert_attr = ''.join([f"'{val}', " for val in args])[:-2]
+        insert_command = f"INSERT INTO {table} VALUES ({insert_attr})"
         self.execute_with_connection(insert_command)
 
-    def get(self, table, expression='1=1'):
-        get_command = f"SELECT * FROM {table} WHERE {expression}"
+    def update_temperature(self, area_id, attribute, value):
+        insert_command = (f"UPDATE Temperatures SET {attribute} = '{value}', "
+                          f"{attribute}Timestamp='{get_timestamp()}' "
+                          f"WHERE areaId={area_id}")
+        print(insert_command)
+        self.execute_with_connection(insert_command)
+
+    def get(self, table, attribute, expression='1=1'):
+        get_command = f"SELECT {attribute} FROM {table} WHERE {expression}"
         connection = sqlite3.connect(self.name)
         cursor = connection.cursor()
         cursor.execute(get_command)
-        return_list = cursor.fetchall()
+        result = cursor.fetchone()[0]
         cursor.close()
-        return return_list
-
-    def get_desired_temperature(self, area_id):
-        expression = f'area_id = {area_id}'
-        return self.get('desired_temperatures', expression)[0]
+        return result
 
     def execute_with_connection(self, sql_command):
         connection = sqlite3.connect(self.name)
         cursor = connection.cursor()
         cursor.execute(sql_command)
         connection.commit()
-        cursor.close()
+        connection.close()
 
-    def insert_temperature(self, sensor_area_id, actual_temperature):
-        self.insert('temperatures',sensor_area_id, actual_temperature)
+    def get_actual_temperature(self, area_id):
+        return self.get('Temperatures','actualTemperature',f'areaId={area_id}')
 
-    def insert_valve(self, valve_area_id, valve_invo):
-        self.insert('valves',valve_area_id, valve_invo)
+    def get_desired_temperature(self, area_id):
+        return self.get('Temperatures','desiredTemperature',f'areaId={area_id}')
 
-    def insert_desired_temperature(self, sensor_area_id, desired_temperature):
-        self.insert('desired_temperatures',sensor_area_id, desired_temperature)
+    def get_state(self):
+        return self.get('Heating', 'state')
 
-    def insert_heating(self):
-        self.insert('heating')
+    def update_actual_temperature(self, area_id, actual_temperature):
+        self.update_temperature(area_id, 'actualTemperature', actual_temperature)
+
+    def update_desired_temperature(self, area_id, desired_temperature):
+        self.update_temperature(area_id, 'desiredTemperature', desired_temperature)
+
+    def update_state(self, new_state):
+        insert_command = (f"UPDATE Heating SET state = {new_state}")
+        self.execute_with_connection(insert_command)
+
+    def init_temperature(self, areaId, defaultTemperature):
+        self.insert('Temperatures', areaId, defaultTemperature, get_timestamp(),
+                    defaultTemperature, get_timestamp())
+
+    def init_heating(self):
+        self.insert('Heating', 'Stop', get_timestamp())
+
+
+def get_timestamp():
+    return datetime.now()

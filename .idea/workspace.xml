@@ -4,14 +4,21 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="6989899d-75fb-4113-8071-3d0f15b2d2f9" name="Changes" comment="Start with visualizing on raspberrys">
-      <change afterPath="$PROJECT_DIR$/area/area.py" afterDir="false" />
+    <list default="true" id="6989899d-75fb-4113-8071-3d0f15b2d2f9" name="Changes" comment="implement area">
+      <change afterPath="$PROJECT_DIR$/area/display.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/heating_unit/heat.py" beforeDir="false" afterPath="$PROJECT_DIR$/heating_unit/heat.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/temperature_sensor/send.py" beforeDir="false" afterPath="$PROJECT_DIR$/area/temperature_sensor.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/valve/config.py" beforeDir="false" afterPath="$PROJECT_DIR$/area/config.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/valve/decode.py" beforeDir="false" afterPath="$PROJECT_DIR$/area/decode.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/valve/receive.py" beforeDir="false" afterPath="$PROJECT_DIR$/area/valve.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/area/area.py" beforeDir="false" afterPath="$PROJECT_DIR$/area/area.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/area/decode.py" beforeDir="false" afterPath="$PROJECT_DIR$/area/decode.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/area/temperature_sensor.py" beforeDir="false" afterPath="$PROJECT_DIR$/area/temperature_sensor.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/area/valve.py" beforeDir="false" afterPath="$PROJECT_DIR$/area/valve.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/server/gui.py" beforeDir="false" afterPath="$PROJECT_DIR$/server/gui.py" afterDir="false" />
+    </list>
+    <list id="3c79c0e2-93ec-4113-a145-6395534d8221" name="Changes by 48791" comment="">
+      <change beforePath="$PROJECT_DIR$/server/createdatabase.py" beforeDir="false" afterPath="$PROJECT_DIR$/server/createdatabase.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/server/database_interface.py" beforeDir="false" afterPath="$PROJECT_DIR$/server/database_interface.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/server/decode.py" beforeDir="false" afterPath="$PROJECT_DIR$/server/decode.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/server/process.py" beforeDir="false" afterPath="$PROJECT_DIR$/server/process.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/server/receive.py" beforeDir="false" afterPath="$PROJECT_DIR$/server/receive.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -115,7 +122,7 @@
       <workItem from="1706021266180" duration="4502000" />
       <workItem from="1706029618241" duration="128000" />
       <workItem from="1706085817651" duration="2969000" />
-      <workItem from="1706099959767" duration="6448000" />
+      <workItem from="1706099959767" duration="11747000" />
     </task>
     <task id="LOCAL-00001" summary="Changes after testing in lab">
       <option name="closed" value="true" />
@@ -133,7 +140,15 @@
       <option name="project" value="LOCAL" />
       <updated>1706028277032</updated>
     </task>
-    <option name="localTasksCounter" value="3" />
+    <task id="LOCAL-00003" summary="implement area">
+      <option name="closed" value="true" />
+      <created>1706115878704</created>
+      <option name="number" value="00003" />
+      <option name="presentableId" value="LOCAL-00003" />
+      <option name="project" value="LOCAL" />
+      <updated>1706115878704</updated>
+    </task>
+    <option name="localTasksCounter" value="4" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -142,7 +157,8 @@
   <component name="VcsManagerConfiguration">
     <MESSAGE value="Changes after testing in lab" />
     <MESSAGE value="Start with visualizing on raspberrys" />
-    <option name="LAST_COMMIT_MESSAGE" value="Start with visualizing on raspberrys" />
+    <MESSAGE value="implement area" />
+    <option name="LAST_COMMIT_MESSAGE" value="implement area" />
   </component>
   <component name="com.intellij.coverage.CoverageDataManagerImpl">
     <SUITE FILE_PATH="coverage/SmartHeating$createdatabase.coverage" NAME="createdatabase Coverage Results" MODIFIED="1705572239031" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/server" />
