@@ -21,9 +21,9 @@ class AreaDisplay:
         self.pixels = neopixel.NeoPixel(board.D18, N_LEDS, brightness=1.0/32, auto_write=False)
 
     def display(self, temperature):
-        self.display_on_screen(temperature)
+        self.display_temperature(temperature)
 
-    def display_on_screen(self, temperature):
+    def display_temperature(self, temperature: float):
         self.disp.clear()
         # self.disp.reset()
         image1 = Image.new("RGB", (self.disp.width, self.disp.height), "WHITE")
@@ -33,7 +33,7 @@ class AreaDisplay:
         self.disp.ShowImage(image1, 0, 0)
         print(f'Temperature: {temperature:0.2f}')
 
-    def display_on_leds(self, valve_status):
+    def display_valve(self, valve_status: bool):
         # to be implemented
         if valve_status:
             self.pixels.fill((0, 255, 0))

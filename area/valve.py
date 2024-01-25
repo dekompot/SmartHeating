@@ -3,17 +3,20 @@
 ACTUATOR - receives communication from the server.
 The valve functions as a gate, regulating the flow of heat to a specific part of the building.
 """
+from typing import List, Callable
+
 import paho.mqtt.client as mqtt
 from config import BROKER, AREA_ID, DEBOUNCE_VALUE
 from decode import decode_temperature
 
 
 class Valve:
-    def __init__(self, area_id):
+    def __init__(self, area_id, callbacks: List[Callable] = None):
         self.area_id = area_id
         self.desired_temperature = 20.0
         self.last_read_temperature = 0.0
         self.is_open = False
+        self.callbacks = callbacks
         self.client = mqtt.Client()
 
     def configure(self):
@@ -42,6 +45,8 @@ class Valve:
             self.close()
         elif temperature < self.desired_temperature - DEBOUNCE_VALUE and not self.is_open:
             self.open()
+        for callback in self.callbacks:
+            callback(self.is_open)
 
     def process_desired_temperature(self, value):
         self.desired_temperature = value
