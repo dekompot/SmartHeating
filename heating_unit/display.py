@@ -26,7 +26,6 @@ class HeatingDisplay:
             self.pixels.fill((0, 0, 0))
         self.signalize_heating_state_change()
 
-
     def visualize_heating_state(self):
         for color in self.colors:
             self.pixels.fill(color)

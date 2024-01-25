@@ -12,21 +12,35 @@ import paho.mqtt.client as mqtt
 from config import BROKER
 
 
-def heat():
-    print("ogrzewaj!")
+class HeatingUnit:
+
+    def __init__(self, callback):
+        self.callback = callback
+        self.client = mqtt.Client()
+        self.state = "stop"
+
+    def connect_to_broker(self):
+        self.client.on_message = self.process_message
+        self.client.connect(BROKER)
+        self.client.subscribe(f"heating")
+
+    def listen(self):
+        self.connect_to_broker()
+        self.client.loop_forever()
+
+    def process_message(self, client, userdata, message):
+        if message.topic == "heating":
+            self.state = message.payload.decode("utf-8")
+
+    def state_change(self):
+        self.callback(self.state)
+        print(self.state)
 
 
-def configure(client, userdata, flags, rc):
-    client.subscribe(f"heating")
-
-
-def run():
-    client = mqtt.Client()
-    client.on_connect = configure
-    client.on_message = heat
-    client.connect(BROKER)
-    client.loop_forever()
+def mock_callback(state):
+    print(state)
 
 
 if __name__ == "__main__":
-    run()
+    heating_unit = HeatingUnit(mock_callback)
+    heating_unit.listen()
