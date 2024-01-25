@@ -8,7 +8,6 @@ from PIL import Image, ImageDraw, ImageFont
 
 N_LEDS = 8
 
-
 class AreaDisplay:
 
     def __init__(self, area_id):

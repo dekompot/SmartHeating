@@ -10,12 +10,13 @@ from display import AreaDisplay
 
 class Area:
 
-    def __init__(self, area_id, frequency):
+    def __init__(self, area_id, frequency, temp_callbacks, valve_callbacks):
         self.area_id = area_id
         self.frequency = frequency
-        self.valve = Valve(self.area_id)
-        self.temperature_sensor = TemperatureSensor(self.area_id, frequency,
-                                                    callbacks=[self.valve.process_current_temperature])
+        self.valve = Valve(self.area_id, callbacks=valve_callbacks)
+        self.temperature_sensor = TemperatureSensor(self.area_id,
+                                                    callbacks=[self.valve.process_current_temperature,
+                                                               *temp_callbacks])
 
     def configure(self):
         self.valve.configure()
@@ -26,8 +27,9 @@ class Area:
         self.temperature_sensor.listen()
 
     def loop(self):
-        self.temperature_sensor.send_measurement()
-        time.sleep(self.frequency)
+        while True:
+            self.temperature_sensor.send_measurement()
+            time.sleep(self.frequency)
 
 
 if __name__ == "__main__":
@@ -35,11 +37,9 @@ if __name__ == "__main__":
     frequency = int(sys.argv[2]) if len(sys.argv) > 2 else 2
 
     area_display = AreaDisplay(area_id=area_id)
-    area = Area(area_id=area_id, frequency=frequency)
+    area = Area(area_id=area_id, frequency=frequency,
+                valve_callbacks=[area_display.display_valve],
+                temp_callbacks=[area_display.display_temperature])
     area.configure()
     area.listen()
-
-    while True:
-        area.loop()
-        area_display.display_valve(area.valve.is_open)
-        area_display.display_temperature(area.temperature_sensor.temperature)
+    area.loop()
