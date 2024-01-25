@@ -39,7 +39,8 @@ class Database:
         connection.close()
 
     def get_number_of_unsatisfied(self):
-        return self.get('Temperatures', 'COUNT(*)', 'desiredTemperature>actualTemperature')
+        return self.get('Temperatures', 'COUNT(*)', 'CAST(desiredTemperature as decimal)'
+                                                    '>CAST(actualTemperature as decimal)')
 
     def get_actual_temperature(self, area_id):
         return self.get('Temperatures', 'actualTemperature', f'areaId={area_id}')
