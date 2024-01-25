@@ -69,7 +69,6 @@ class GUI:
         print(f"GUI {message.payload.decode('utf-8')}")
         for area_id in range(NUMBER_OF_AREAS):
             self.actual_temperatures[area_id].set(self.db.get_actual_temperature(area_id))
-
         self.heating_state.set(self.db.get_state())
 
     def disconnect_from_broker(self):
