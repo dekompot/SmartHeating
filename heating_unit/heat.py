@@ -48,6 +48,8 @@ if __name__ == "__main__":
     heating_display = HeatingDisplay()
 
     while True:
+        heating_display.on_state_change(heating_unit.state)
         if heating_unit.state == "start":
             heating_display.display_heating()
-        heating_display.on_state_change(heating_unit.state)
+            time.sleep(SLEEP)
+        

@@ -6,7 +6,7 @@ import time
 from typing import Callable, List
 
 import paho.mqtt.client as mqtt
-# import w1thermsensor
+import w1thermsensor
 from config import AREA_ID, BROKER
 from decode import decode_temperature
 
@@ -15,7 +15,7 @@ N_LEDS = 8
 
 class MockSensor:
     def get_temperature(self):
-        return 10 + random.random() * 10
+        return 16 + random.random() * 2
 
 
 # Add code that stops sensor from sending information?
@@ -25,8 +25,7 @@ class TemperatureSensor:
         self.area_id = area_id
         self.temperature = 0
         self.client = mqtt.Client()
-        # self.sensor = w1thermsensor.W1ThermSensor()
-        self.sensor = MockSensor()
+        self.sensor = w1thermsensor.W1ThermSensor()
         self.callbacks = callbacks
 
     def listen(self):
@@ -50,6 +49,8 @@ class TemperatureSensor:
     def send_measurement(self):
         self.temperature = self.sensor.get_temperature()
         self.publish(self.temperature)
+        for callback in self.callbacks:
+            callback(self.temperature)
 
     def publish(self, value):
         print(f"Publishing actual {self.area_id}/{value:.2f}")
