@@ -4,9 +4,7 @@ The heating unit processes messages from server to heat up temperature.
 This programm may communicate with an interface of working heating unit.
 """
 import time
-
 import paho.mqtt.client as mqtt
-
 from config import BROKER, SLEEP
 from display import HeatingDisplay
 
@@ -46,4 +44,3 @@ if __name__ == "__main__":
         if heating_unit.state == "start":
             heating_display.display_heating()
             time.sleep(SLEEP)
-        

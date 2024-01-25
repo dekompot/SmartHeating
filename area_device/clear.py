@@ -1,6 +1,5 @@
 import board
 import neopixel
-
 import lib.oled.SSD1331 as SSD1331
 from config import N_LEDS
 
@@ -10,6 +9,5 @@ pixels.show()
 
 disp = SSD1331.SSD1331()
 disp.Init()
- # Clear display.
 disp.clear()
 disp.reset()
