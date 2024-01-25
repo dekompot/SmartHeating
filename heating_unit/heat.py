@@ -20,17 +20,17 @@ class HeatingUnit:
         self.state = "stop"
 
     def connect_to_broker(self):
-        self.client.on_message = self.process_message
         self.client.connect(BROKER)
         self.client.subscribe(f"heating")
+        self.client.on_message = self.process_message
 
     def listen(self):
         self.connect_to_broker()
         self.client.loop_forever()
 
     def process_message(self, client, userdata, message):
-        if message.topic == "heating":
-            self.state = message.payload.decode("utf-8")
+        self.state = message.payload.decode("utf-8")
+        self.state_change()
 
     def state_change(self):
         self.callback(self.state)

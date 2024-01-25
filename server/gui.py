@@ -16,7 +16,8 @@ class GUI:
         self.db = Database()
         self.client = mqtt.Client()
         self.number_of_areas = NUMBER_OF_AREAS
-        self.desired_temperatures = [tkinter.IntVar(self.window, DEFAULT_TEMPERATURE) for i in range(NUMBER_OF_AREAS)]
+        self.desired_temperatures = [tkinter.IntVar(self.window, self.db.get_desired_temperature(i))
+                                     for i in range(NUMBER_OF_AREAS)]
         self.actual_temperatures = [tkinter.IntVar(self.window, self.db.get_actual_temperature(i)) for i in
                                     range(NUMBER_OF_AREAS)]
         self.heating_state = tkinter.StringVar(self.window, value=self.db.get_state())
@@ -65,7 +66,7 @@ class GUI:
         self.db.update_desired_temperature(index, desired_temperature)
 
     def refresh(self, client, userdata, message):
-        print(f"GUI {message}")
+        print(f"GUI {message.payload.decode('utf-8')}")
         for area_id in range(NUMBER_OF_AREAS):
             self.actual_temperatures[area_id].set(self.db.get_actual_temperature(area_id))
 
