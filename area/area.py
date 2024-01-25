@@ -41,5 +41,3 @@ if __name__ == "__main__":
     area.listen()
     area.loop()
 
-    area_display = AreaDisplay(area_id)
-

@@ -5,7 +5,6 @@ import board
 from config import AREA_ID, BROKER
 import lib.oled.SSD1331 as SSD1331
 from PIL import Image, ImageDraw, ImageFont
-from decode import decode_with_id
 
 N_LEDS = 8
 
