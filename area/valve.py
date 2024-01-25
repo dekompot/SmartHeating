@@ -45,8 +45,6 @@ class Valve:
             self.close()
         elif temperature < self.desired_temperature - DEBOUNCE_VALUE and not self.is_open:
             self.open()
-        for callback in self.callbacks:
-            callback(self.is_open)
 
     def process_desired_temperature(self, value):
         self.desired_temperature = value

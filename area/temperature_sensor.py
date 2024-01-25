@@ -2,7 +2,7 @@
 #!/usr/bin/env python3
 import random
 import sys
-from datetime import time
+import time
 from typing import Callable, List
 
 import paho.mqtt.client as mqtt
@@ -23,6 +23,7 @@ class TemperatureSensor:
 
     def __init__(self, area_id, callbacks: List[Callable] = None):
         self.area_id = area_id
+        self.temperature = 0
         self.client = mqtt.Client()
         # self.sensor = w1thermsensor.W1ThermSensor()
         self.sensor = MockSensor()
@@ -47,10 +48,8 @@ class TemperatureSensor:
             self.send_measurement()
 
     def send_measurement(self):
-        temp = self.sensor.get_temperature()
-        self.publish(temp)
-        for callback in self.callbacks:
-            callback(temp)
+        self.temperature = self.sensor.get_temperature()
+        self.publish(self.temperature)
 
     def publish(self, value):
         print(f"Publishing actual {self.area_id}/{value:.2f}")

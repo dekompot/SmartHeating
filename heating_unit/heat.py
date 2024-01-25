@@ -13,13 +13,13 @@ from typing import List, Callable
 """from db???"""
 
 import paho.mqtt.client as mqtt
-from config import BROKER
+from config import BROKER, SLEEP, N_LEDS
+from display import HeatingDisplay
 
 
 class HeatingUnit:
 
-    def __init__(self, callbacks: List[Callable] = None):
-        self.callbacks = callbacks
+    def __init__(self):
         self.client = mqtt.Client()
         self.state = "stop"
 
@@ -37,20 +37,17 @@ class HeatingUnit:
         self.state_change()
 
     def state_change(self):
-        for callback in self.callbacks:
-            asyncio.run(callback(self.state))
         print(self.state)
 
 
-async def mock_callback(state):
-    print(state)
-    print("sleep")
-    await asyncio.sleep(10)
-    print("wakeup")
-
-
 if __name__ == "__main__":
-    heating_unit = HeatingUnit([mock_callback])
+
+    heating_unit = HeatingUnit()
     heating_unit.listen()
+
+    heating_display = HeatingDisplay()
+
     while True:
-        pass
+        if heating_unit.state == "start":
+            heating_display.display_heating()
+        heating_display.on_state_change(heating_unit.state)
