@@ -1,11 +1,11 @@
-import paho.mqtt.client as mqtt
-# import w1thermsensor
-import neopixel
-import board
 import time
-from config import AREA_ID, BROKER, N_LEDS
-import lib.oled.SSD1331 as SSD1331
+
+import board
+import neopixel
 from PIL import Image, ImageDraw, ImageFont
+
+import lib.oled.SSD1331 as SSD1331
+from config import N_LEDS
 from temperature_sensor import MockSensor
 
 
@@ -44,6 +44,8 @@ class AreaDisplay:
         self.pixels.show()
         print(f"Valve status is {valve_status}")
 
+
+# Test whether display elements are working
 if __name__ == "__main__":
     area_display = AreaDisplay(1)
     sensor = MockSensor()

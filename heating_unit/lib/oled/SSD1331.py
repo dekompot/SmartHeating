@@ -1,10 +1,12 @@
 #!/usr/bin/env python3
 # -*- coding:utf-8 -*-
 
-from . import config
-import RPi.GPIO as GPIO
 import time
+
+import RPi.GPIO as GPIO
 import numpy as np
+
+from . import config
 
 DRAW_LINE                       = 0x21
 DRAW_RECTANGLE                  = 0x22

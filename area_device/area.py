@@ -1,11 +1,9 @@
 import sys
 import time
 
-import paho.mqtt.client as mqtt
-
-from temperature_sensor import TemperatureSensor, MockSensor
+from display import AreaDisplay, MockSensor
+from temperature_sensor import TemperatureSensor
 from valve import Valve
-
 
 
 class Area:
@@ -19,7 +17,6 @@ class Area:
                                                                *temp_callbacks])
         if is_mock:
             self.temperature_sensor.sensor = MockSensor()
-
 
     def configure(self):
         self.valve.configure()
@@ -40,9 +37,10 @@ if __name__ == "__main__":
     frequency = int(sys.argv[2]) if len(sys.argv) > 2 else 2
     is_mock = len(sys.argv) > 3
 
+    area_display = AreaDisplay(area_id=area_id)
     area = Area(area_id=area_id, frequency=frequency, is_mock=is_mock,
-                valve_callbacks=[],
-                temp_callbacks=[])
+                valve_callbacks=[area_display.display_valve],
+                temp_callbacks=[area_display.display_temperature])
     area.configure()
     area.listen()
     area.loop()

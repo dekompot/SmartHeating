@@ -3,17 +3,11 @@ ACTUATOR - receives communication from the server.
 The heating unit processes messages from server to heat up temperature.
 This programm may communicate with an interface of working heating unit.
 """
-import asyncio
 import time
-from typing import List, Callable
-
-#!/usr/bin/env python3
-"""Managing simple GUI for user to change desired temperature in each area."""
-"""may present current temperature?"""
-"""from db???"""
 
 import paho.mqtt.client as mqtt
-from config import BROKER, SLEEP, N_LEDS
+
+from config import BROKER, SLEEP
 from display import HeatingDisplay
 
 

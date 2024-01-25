@@ -6,7 +6,8 @@ The valve functions as a gate, regulating the flow of heat to a specific part of
 from typing import List, Callable
 
 import paho.mqtt.client as mqtt
-from config import BROKER, AREA_ID, DEBOUNCE_VALUE
+
+from config import BROKER, DEBOUNCE_VALUE
 from decode import decode_temperature
 
 
@@ -20,7 +21,6 @@ class Valve:
         self.client = mqtt.Client()
 
     def configure(self):
-        # self.client.on_connect = self.configure_client
         self.client.on_message = self.process_message
         self.client.on_disconnect = self.stop
         self.client.connect(BROKER)

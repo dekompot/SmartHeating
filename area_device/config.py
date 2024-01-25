@@ -1,4 +1,4 @@
 AREA_ID = '0'
-BROKER = '10.108.33.121'
+BROKER = 'localhost'
 DEBOUNCE_VALUE = 0.5
 N_LEDS = 8

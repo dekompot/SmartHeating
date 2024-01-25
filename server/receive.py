@@ -1,9 +1,3 @@
-#!/usr/bin/env python3
-"""Managing simple GUI for user to change desired temperature in each area."""
-
-"""may present current temperature?"""
-"""from db???"""
-
 from createdatabase import create_database
 from decode import get_ask_update_id, decode_temperature
 import paho.mqtt.client as mqtt

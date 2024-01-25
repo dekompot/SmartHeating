@@ -1,13 +1,11 @@
-
 #!/usr/bin/env python3
 import random
-import sys
-import time
 from typing import Callable, List
 
 import paho.mqtt.client as mqtt
 import w1thermsensor
-from config import AREA_ID, BROKER
+
+from config import BROKER
 from decode import decode_temperature
 
 N_LEDS = 8
@@ -15,10 +13,9 @@ N_LEDS = 8
 
 class MockSensor:
     def get_temperature(self):
-        return 16 + random.random() * 2
+        return 10 + random.random() * 10
 
 
-# Add code that stops sensor from sending information?
 class TemperatureSensor:
 
     def __init__(self, area_id, callbacks: List[Callable] = None):
