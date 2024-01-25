@@ -3,6 +3,7 @@ import time
 import neopixel
 import board
 import RPi.GPIO as GPIO
+from random_colors import visualize_fire
 
 GPIO.setmode(GPIO.BCM)
 buzzerPin = 23
@@ -26,10 +27,11 @@ class HeatingDisplay:
             self.pixels.fill((0, 0, 0))
         self.signalize_heating_state_change()
 
-    def visualize_heating_state(self):
-        for color in self.colors:
-            self.pixels.fill(color)
+    def display_heating(self):
+        if self.heating_state == "start":
+            visualize_fire(self.pixels, N_LEDS)
             time.sleep(1)
+
 
     def signalize_heating_state_change(self):
         GPIO.output(buzzerPin, GPIO.LOW)

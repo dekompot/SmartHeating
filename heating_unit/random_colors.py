@@ -18,6 +18,11 @@ def generate_fire_color():
     return color
 
 
+def visualize_fire(pixels, n_pixels):
+    for i in range(n_pixels):
+        pixels[i] = generate_fire_color()
+
+
 # Example usage:
 for _ in range(10):
     random_color = generate_fire_color()

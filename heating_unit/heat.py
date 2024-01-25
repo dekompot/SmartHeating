@@ -3,6 +3,10 @@ ACTUATOR - receives communication from the server.
 The heating unit processes messages from server to heat up temperature.
 This programm may communicate with an interface of working heating unit.
 """
+import asyncio
+import time
+from typing import List, Callable
+
 #!/usr/bin/env python3
 """Managing simple GUI for user to change desired temperature in each area."""
 """may present current temperature?"""
@@ -14,8 +18,8 @@ from config import BROKER
 
 class HeatingUnit:
 
-    def __init__(self, callback):
-        self.callback = callback
+    def __init__(self, callbacks: List[Callable] = None):
+        self.callbacks = callbacks
         self.client = mqtt.Client()
         self.state = "stop"
 
@@ -26,21 +30,27 @@ class HeatingUnit:
 
     def listen(self):
         self.connect_to_broker()
-        self.client.loop_forever()
+        self.client.loop_start()
 
     def process_message(self, client, userdata, message):
         self.state = message.payload.decode("utf-8")
         self.state_change()
 
     def state_change(self):
-        self.callback(self.state)
+        for callback in self.callbacks:
+            asyncio.run(callback(self.state))
         print(self.state)
 
 
-def mock_callback(state):
+async def mock_callback(state):
     print(state)
+    print("sleep")
+    await asyncio.sleep(10)
+    print("wakeup")
 
 
 if __name__ == "__main__":
-    heating_unit = HeatingUnit(mock_callback)
+    heating_unit = HeatingUnit([mock_callback])
     heating_unit.listen()
+    while True:
+        pass
