@@ -5,13 +5,15 @@ import paho.mqtt.client as mqtt
 
 from temperature_sensor import TemperatureSensor
 from valve import Valve
+from display import AreaDisplay
 
 
 class Area:
 
-    def __init__(self, area_id, frequency):
+    def __init__(self, area_id, frequency, display: AreaDisplay):
         self.area_id = area_id
         self.frequency = frequency
+        self.display = display
         self.valve = Valve(self.area_id)
         self.temperature_sensor = TemperatureSensor(self.area_id,
                                                     callbacks=[self.valve.process_current_temperature])
@@ -38,3 +40,6 @@ if __name__ == "__main__":
     area.configure()
     area.listen()
     area.loop()
+
+    area_display = AreaDisplay(area_id)
+

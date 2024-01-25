@@ -1,4 +1,3 @@
-'''
 import paho.mqtt.client as mqtt
 # import w1thermsensor
 import neopixel
@@ -10,14 +9,16 @@ from decode import decode_with_id
 
 N_LEDS = 8
 
-class DisplayInfo:
+class AreaDisplay:
 
-    def __init__(self):
+    def __init__(self, area_id):
+        self.area_id = area_id
         self.disp = SSD1331.SSD1331()
         self.disp.Init()
         # Clear display.
         self.disp.clear()
-        self.font = ImageFont.truetype('./lib/oled/Font.ttf', 20)
+        self.fontLarge = ImageFont.truetype('./lib/oled/Font.ttf', 20)
+        self.fontSmall = ImageFont.truetype('./lib/oled/Font.ttf', 13)
         self.pixels = neopixel.NeoPixel(board.D18, N_LEDS, brightness=1.0/32, auto_write=False)
 
     def display(self, temperature):
@@ -28,8 +29,9 @@ class DisplayInfo:
         # self.disp.reset()
         image1 = Image.new("RGB", (self.disp.width, self.disp.height), "WHITE")
         draw = ImageDraw.Draw(image1)
-        draw.text((1, 1), f'Temperature: {temperature:0.2f}', font=self.font, fill='BLACK')
-        draw.showImage(image1, 0, 0)
+        draw.text((8, 0), f'Area: {self.area_id}', font=self.fontSmall, fill='BLACK')
+        draw.text((12, 40), f'Temperature: {temperature:0.2f}', font=self.fontLarge, fill='BLACK')
+        self.disp.ShowImage(image1, 0, 0)
         print(f'Temperature: {temperature:0.2f}')
 
     def display_on_leds(self, valve_status):
@@ -40,5 +42,3 @@ class DisplayInfo:
             self.pixels.fill((255, 0, 0))
         self.pixels.show()
         print(f"Valve status is {valve_status}")
-
-'''
